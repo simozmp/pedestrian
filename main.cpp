@@ -27,7 +27,7 @@ int main ()
       }
 
       //realtime output of elaborated frame
-      imshow("debug", frame);
+      imshow("debug", img_to_show);
       cv::waitKey(3);
 
    }
