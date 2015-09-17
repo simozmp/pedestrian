@@ -1,4 +1,9 @@
+#include "common_defs.h"
 #include "detector.h"
+#include "kalman.h"
+
+/* main for detector */
+/*
 
 int main ()
 {
@@ -34,3 +39,42 @@ int main ()
 
    return 0;
 }
+
+
+*/
+
+/* main for kalman filter */
+
+using namespace std;
+
+int main()
+{
+    cv::Point s, p;
+    Kalman_Filter kf(0, 0);
+
+    p = kf.kalman_predict();
+    cout << "kalman prediction: " << p.x << " " << p.y << endl;
+
+    s = kf.kalman_correct(10, 10);
+    cout << "kalman corrected state: " << s.x << " " << s.y << endl;
+
+    p = kf.kalman_predict();
+    cout << "kalman prediction: " << p.x << " " << p.y << endl;
+
+    s = kf.kalman_correct(20, 20);
+    cout << "kalman corrected state: " << s.x << " " << s.y << endl;
+
+    p = kf.kalman_predict();
+    cout << "kalman prediction: " << p.x << " " << p.y << endl;
+
+    s = kf.kalman_correct(30, 30);
+    cout << "kalman corrected state: " << s.x << " " << s.y << endl;
+
+    for(int i=0; i<5; i++) {
+        p = kf.kalman_predict();
+        cout << "kalman prediction: " << p.x << " " << p.y << endl;
+    }   
+
+    return 0;
+}
+
