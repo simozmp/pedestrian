@@ -13,5 +13,9 @@
 
 /* Wrapper TYPES */
 #ifndef TYPES
-enum TYPES = {PEDESTRIANS, CYCLES, CARS};
+enum TYPES {PEDESTRIANS, CYCLES, CARS};
 #endif
+
+/* namespaces */
+//using namespace cv;
+//using namespace std;
