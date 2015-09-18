@@ -2,7 +2,7 @@
 
 int main ()
 {
-   Detector detector(PEDESTRIANS);
+   Detector detector;
    cv::VideoCapture vc;
    cv::UMat frame;
    cv::Mat img_to_show;
@@ -14,16 +14,29 @@ int main ()
       vc >> frame;
       frame.copyTo(img_to_show);
 
-      std::vector<cv::Rect> found;
+      Detected found;
 
       //detection of pedestrians
       found = detector.detect(frame);
 
       // Draw positive classified windows
-      for (size_t i = 0; i < found.size(); i++)
+
+      for (size_t i = 0; i < found.pedestrians_found.size(); i++)
       {
-         cv::Rect r = found[i];
+         cv::Rect r = found.pedestrians_found[i];
          rectangle(img_to_show, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
+      }
+
+      for (size_t i = 0; i < found.cycles_found.size(); i++)
+      {
+         cv::Rect r = found.cycles_found[i];
+         rectangle(img_to_show, r.tl(), r.br(), cv::Scalar(255, 0, 0), 3);
+      }
+
+      for (size_t i = 0; i < found.cars_found.size(); i++)
+      {
+         cv::Rect r = found.cars_found[i];
+         rectangle(img_to_show, r.tl(), r.br(), cv::Scalar(0, 0, 255), 3);
       }
 
       //realtime output of elaborated frame
