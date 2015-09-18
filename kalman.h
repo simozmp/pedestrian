@@ -15,18 +15,19 @@ class Kalman_Filter
   private:
     cv::KalmanFilter _kf;
     cv::Mat_<float> _measurement;
-    cv::Mat_<float> _state;
 
   public:
     /* Constructors */
-    Kalman_Filter(float x, float y) : _kf(4, 2, 0), _measurement(2, 1), _state(4, 1)
+    Kalman_Filter() : _kf(4, 2, 0), _measurement(2, 1) {}
+
+    /* Methods */
+    void init(float x, float y)
     {
       _measurement = cv::Mat_<float>::zeros(2,1);
       _measurement.at<float>(0, 0) = x;
       _measurement.at<float>(1, 0) = y;
 
       _kf.statePre.setTo(0);
-
       _kf.statePre.at<float>(0, 0) = x;
       _kf.statePre.at<float>(1, 0) = y;
 

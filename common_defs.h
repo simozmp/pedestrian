@@ -1,3 +1,6 @@
+#ifndef __COMMON_DEFS__
+#define __COMMON_DEFS__
+
 /* Standard headers */
 #include <iostream>
 #include <fstream>
@@ -14,12 +17,14 @@
 
 
 /* Wrapper TYPES */
-#ifndef TYPES
 enum TYPES {PEDESTRIANS, CYCLES, CARS};
-#endif
 
 /* namespaces */
 //using namespace std;
 //using namespace cv;
 
+/* Utilities */
+#define TTL 5
+#define TRESHOLD 17
 
+#endif  /*  __COMMON_DEFS__  */
