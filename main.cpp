@@ -10,6 +10,7 @@
 #include "common_defs.h"
 #include "detector.h"
 #include "kalman.h"
+#include "point_image.h"
 
 /* main for detector */
 
@@ -28,29 +29,31 @@ int main ()
   /* Un oggetto detector per trovare "persone" nel video */
   Detector detector(PEDESTRIANS);
 
-  /* L'input video */
+  /* Viedo stream declaration */
   cv::VideoCapture vc;
 
-  /* Le matrici in cui vengono salvati i frame per essere elaborati e mandati in output */
+  /* Images matrixes (actual frame, output image) */
   cv::UMat frame;
   cv::Mat img_to_show;
+  Point_Image point_image;
 
-  /* Apertura dello stream video */
+  /* Opening videostram */
   vc.open("/home/ubuntu/development/pedestrian/768x576.avi");
 
   std::vector<Found_Id>  id_list;
 
   while (true)
   {
-    /* Importo il frame attuale nel suo contenitore */
+    /* Import the frame */
     vc >> frame;
+    point_image.set_image(frame);
     frame.copyTo(img_to_show);
 
-    /* I contenitori per gli output delle elaborazioni */
+    /* Containers for Detection results */
     std::vector<cv::Rect> found;
 
     //detection of things
-    found = detector.detect(frame);
+    found = detector.detect(point_image.image());
 
     // for each Rect found
     for (size_t i = 0; i < found.size(); i++)

@@ -10,7 +10,7 @@ class Point_Image
   private:
 
     /* _image record the rgb data */
-    cv::Mat _image;
+    cv::UMat _image;
 
     /* _data record the xyz data */
     cv::Mat _data;
@@ -22,29 +22,22 @@ class Point_Image
   public:
 
     /* Constructors */
-    Point_Image(cv::Mat image, cv::Mat data, cv::Mat normal_vectors)
+    Point_Image(cv::UMat image, cv::Mat data, cv::Mat normal_vectors)
     {
       _image = image;
       _data = data;
       _normal_vectors = normal_vectors;
     }
 
-    Point_Image(cv::Mat image)
+    Point_Image(cv::UMat image)
     {
       _image = image;
-      _data = NULL;
-      _normal_vectors = NULL;
     }
 
-    Point_Image()
-    {
-      _image = NULL;
-      _data = NULL;
-      _normal_vectors = NULL;
-    }
+    Point_Image() {}
 
     /* Methods to set values */
-    void set_image(cv::Mat image) { _image = image; }
+    void set_image(cv::UMat image) { _image = image; }
 
     void set_data(cv::Mat data) { _data = data; }
 
@@ -52,7 +45,7 @@ class Point_Image
 
     /*Methods to get values */
 
-    cv::Mat image() { return _image; }
+    cv::UMat image() { return _image; }
 
     cv::Mat data() { return _data; }
 
